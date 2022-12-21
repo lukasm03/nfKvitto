@@ -36,7 +36,7 @@
 				<div class="kvittoBild">
 					<a href={`/admin/${kvitto.id}`}>
 						<img
-							src={`http://172.105.131.135/api/files/kvitton/${kvitto.id}/${kvitto.bild}?thumb=80x80`}
+							src={`https://172.105.131.135/api/files/kvitton/${kvitto.id}/${kvitto.bild}?thumb=80x80`}
 							alt={'bild på kvittot'}
 							width={80}
 							height={80}
