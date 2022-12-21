@@ -1,6 +1,6 @@
 <script lang="ts">
     import Login from "$lib/Login.svelte";
-    import SkapaNytt from "$lib/SkapaNytt.svelte";   
+    import Kvitton from "$lib/Kvitton.svelte";
     import { currentUser } from "$lib/pocketbase";
 </script>
 
@@ -9,6 +9,6 @@
 
 {#if $currentUser}
 
-  <SkapaNytt />
+  <Kvitton />
   
 {/if}
