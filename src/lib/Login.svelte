@@ -12,11 +12,29 @@
 
 {#if $currentUser === null}
     <div class="login">
-        <form on:submit|preventDefault>
-            <input type="text" bind:value={username}/>
-            <input type="password" bind:value={password}/>
-
-            <button on:click={login}>Sign in</button> 
+        <form on:submit|preventDefault={login} class="formStilen">
+            <label for="username">Användarnamn:</label>
+            <input id="username" type="text" bind:value={username}/>
+            <label for="password">Lösenord:</label>
+            <input id="password" type="password" bind:value={password}/>
+            <button type="submit" class="buttonStilen">Logga in</button> 
         </form>
     </div>
 {/if}
+
+<style>
+    .formStilen{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-width: 62vw;
+    }
+    .login{
+        display: flex;
+        justify-content: center;
+    }
+    .buttonStilen{
+        width: fit-content;
+        margin-top: 2vh;
+    }
+</style>

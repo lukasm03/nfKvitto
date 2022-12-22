@@ -20,8 +20,8 @@
         formData.append("swish", swish);
         formData.append("typavkop", typavkop); 
         try {
-            await pb.collection("kvitton").create(formData);
             skickat = true;  
+            await pb.collection("kvitton").create(formData);
         }
         catch (error) {
             console.log(error);
@@ -30,6 +30,12 @@
         setTimeout(() => {
             skickat = false;
         }, 3000);
+        //reset all values
+        vara = "";
+        pris = "" as any;
+        datum = "" as any;
+        bild = undefined as any;
+        swish = "";
     }
     
 
