@@ -23,7 +23,7 @@
             <div>
                 <label class="pekare">
                     <img
-                    src={`https:nfkvitton.fly.dev/api/files/kvitton/${kvitto.id}/${kvitto.bild}?thumb=120x150`}
+                    src={`https://nfkvitton.fly.dev/api/files/kvitton/${kvitto.id}/${kvitto.bild}?thumb=120x150`}
                     alt={'bild på kvittot'}
                     width={120}
                     height={150}
