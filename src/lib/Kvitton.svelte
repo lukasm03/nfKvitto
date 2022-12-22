@@ -36,7 +36,7 @@
 				<div class="kvittoBild">
 					<a href={`/admin/${kvitto.id}`}>
 						<img
-							src={`https:nfkvitton.fly.dev/api/files/kvitton/${kvitto.id}/${kvitto.bild}?thumb=80x80`}
+							src={`https://nfkvitton.fly.dev/api/files/kvitton/${kvitto.id}/${kvitto.bild}?thumb=80x80`}
 							alt={'bild på kvittot'}
 							width={80}
 							height={80}
