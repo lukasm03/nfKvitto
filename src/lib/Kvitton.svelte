@@ -6,11 +6,10 @@
 	let visa: string = "alla";
 
 	onMount(async () => {
-		const kvittoLista = await pb.collection('kvitton').getList(1, 50, {
-			sort: 'datum',
-			order: 'desc'
+		const kvittoLista = await pb.collection('kvitton').getFullList(20, {
+			sort: '-datum',
 		});
-		kvitton = kvittoLista.items;
+		kvitton = kvittoLista;
 	});
 </script>
 
@@ -36,7 +35,7 @@
 				<div class="kvittoBild">
 					<a href={`/admin/${kvitto.id}`}>
 						<img
-							src={`https://nfkvitton.fly.dev/api/files/kvitton/${kvitto.id}/${kvitto.bild}?thumb=80x80`}
+							src={`http://139.162.135.17:80/api/files/kvitton/${kvitto.id}/${kvitto.bild}?thumb=80x80`}
 							alt={'bild på kvittot'}
 							width={80}
 							height={80}
@@ -63,11 +62,11 @@
 		justify-content: center;
 	}
 	.kvittoHuvud {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-	}
+		display: flex;
+		flex-direction: column;
+		width: 400px;
+		margin: 0 auto;
+		}
 	.kvittoStil {
 		display: flex;
 		align-items: center;

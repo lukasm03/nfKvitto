@@ -34,7 +34,7 @@
         vara = "";
         pris = "" as any;
         datum = "" as any;
-        bild = undefined as any;
+        bild = "" as any;
         swish = "";
     }
     
