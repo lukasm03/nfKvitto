@@ -17,7 +17,7 @@
         const options = {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: `{"payee":${JSON.stringify(`0${kvitto.swish}`)
+                body: `{"payee":${JSON.stringify(`${kvitto.swish}`)
                     },"amount":{"value":${(kvitto.pris)}},"message":{"value":${JSON.stringify(kvitto.vara)
                     }}}`,
             };
