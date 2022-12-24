@@ -1,18 +1,24 @@
 <script lang="ts">
 	import { pb } from '$lib/pocketbase';
 	import { onMount } from 'svelte';
+	import skapaExcelArk from './excel';
 
 	let kvitton: any[] = [];
 	let visa: string = "alla";
 
 	onMount(async () => {
-		const kvittoLista = await pb.collection('kvitton').getFullList(20, {
+		const kvittoLista = await pb.collection('kvitton').getFullList(10, {
 			sort: '-datum',
 		});
 		kvitton = kvittoLista;
 	});
 </script>
 
+<span class="spanStilen">
+	<button class="excelKnapp" on:click={() => skapaExcelArk(kvitton)}>
+	  Exportera till excel
+	</button>
+  </span>
 <div class="filterStilen">
 	<button name="visaalla" value="alla" on:click={() => visa = "alla"}>Visa alla
 	</button>
@@ -56,6 +62,13 @@
 </div>
 
 <style>
+	.spanStilen {
+		display: flex;
+		justify-content: center;
+	}
+	.excelKnapp {
+		justify-content: center;
+	}
 	.filterStilen {
 		margin-top: 0.5vh;
 		display: flex;

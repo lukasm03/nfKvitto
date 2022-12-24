@@ -8,12 +8,25 @@
     let kvitto: any = {};
     let bild: string;
     let formData: FormData = new FormData();
+    let qrKod: string;
 
 
    onMount(async () => {
 		kvitto = await pb.collection('kvitton').getOne(data.kvitto.id);
         bild = `http://139.162.135.17:80/api/files/kvitton/${kvitto.id}/${kvitto.bild}?thumb=120x150`
-	});
+        const options = {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: `{"payee":${JSON.stringify(`0${kvitto.swish}`)
+                    },"amount":{"value":${(kvitto.pris)}},"message":{"value":${JSON.stringify(kvitto.vara)
+                    }}}`,
+            };
+            fetch("https://api.swish.nu/qr/v2/prefilled", options)
+                .then((response) => response.blob())
+                .then((blob) => URL.createObjectURL(blob))
+                .then((url) => qrKod = (url))
+                .catch((err) => console.error(err));
+        });
 
     async function taBortKvitto() {
         await pb.collection('kvitton').delete(data.kvitto.id);
@@ -70,8 +83,8 @@
                 <label>
                     Kategori på köpet:
                     <select  name="Kategori" bind:value={kvitto.kategori}>
-                        <option value="Laborationer" name="Laborationer">Laborationer</option>
-                        <option value="Medlemsavgifter" name="Medlemsavgifter">Medlemsavgifter</option>
+                        <option value="Laborationer">Laborationer</option>
+                        <option value="Medlemsavgifter">Medlemsavgifter</option>
                         <option value="Kök&fester">Kök & fester</option>
                         <option value="Försäljning">Försäljning</option>
                         <option value="NF-artiklar">NF-artiklar</option>
@@ -93,8 +106,8 @@
                 <label>
                     Typ av köp:
                     <select  name="Typavköp" bind:value={kvitto.typavkop}>
-                        <option value="Avgift" name="Avgift">Avgift</option>
-                        <option value="Intäkt" name="Intäkt">Intäkt</option>
+                        <option value="Avgift">Avgift</option>
+                        <option value="Intäkt">Intäkt</option>
                     </select>
                 </label>
                 <button class="skickaKnapp" type="submit">Spara ändringar</button>
@@ -107,6 +120,10 @@
         <div class="knappStilen">
             <button on:click={() =>  {goto('/admin')}}>Tillbaka till admin</button>
             <button on:click={() => visaQr = false}>Forsätt redigera kvitto</button>
+        </div>
+        <div class="divByt">
+            <img src={qrKod} alt="QR-kod" width={150}
+            height={150} />
         </div>
     </div> 
 {/if}
