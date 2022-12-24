@@ -13,7 +13,7 @@
 
    onMount(async () => {
 		kvitto = await pb.collection('kvitton').getOne(data.kvitto.id);
-        bild = `http://139.162.135.17:80/api/files/kvitton/${kvitto.id}/${kvitto.bild}?thumb=120x150`
+        bild = `https://nfkvitto.se/api/files/kvitton/${kvitto.id}/${kvitto.bild}?thumb=120x150`
         const options = {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
