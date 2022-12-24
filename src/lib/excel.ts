@@ -73,6 +73,7 @@ export default async function skapaExcelArk(excelInfo: any[]) {
         sheet.getColumn(2).numFmt = "@"
     }
     const läggaTillData = () => {
+        excelInfo.reverse();
         excelInfo.forEach((item, i) => {
             let datums = new Date((item.datum).slice(0,10));
             let priset = Number(item.pris)
