@@ -91,7 +91,7 @@ export default async function skapaExcelArk(excelInfo: any[]) {
                     sheet.addRow({ kassaKredit: priset, ver: i + 1, datum: datums, artiklarDebit: priset });
                 }
                 sheet.getCell(`B${i + 3}`).value = {
-                    hyperlink: `http://139.162.135.17:80/api/files/kvitton/${item.id}/${item.bild}`,
+                    hyperlink: `https://nfkvitto.se/api/files/kvitton/${item.id}/${item.bild}`,
                     text: item.vara
                 }
             } else if (item.typavkop === "Intäkt") {
@@ -109,7 +109,7 @@ export default async function skapaExcelArk(excelInfo: any[]) {
                     sheet.addRow({ kassaDebit: priset, ver: i + 1, datum: datums, artiklarKredit: priset });
                 }
                 sheet.getCell(`B${i + 3}`).value = {
-                    hyperlink: `http://139.162.135.17:80/api/files/kvitton/${item.id}/${item.bild}`,
+                    hyperlink: `https://nfkvitto.se/api/files/kvitton/${item.id}/${item.bild}`,
                     text: item.vara
                 }
             }
