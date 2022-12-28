@@ -4,44 +4,58 @@
 	let skapaExcelArk: Function;
 
 	let kvitton: any[] = [];
-	let visa: string = "alla";
+	let visa: string = 'alla';
 
 	onMount(async () => {
-		const kvittoLista = await pb.collection('kvitton').getFullList(12, {
-			sort: '-datum',
-		});
+		kvitton = await getdata();
 		skapaExcelArk = (await import(`./excel`)).default; // this will work
-		kvitton = kvittoLista;
 	});
+
+	const getdata = async () => {
+		// set cache lifetime in seconds
+		const cachelife = 30;
+		let expired: boolean = false;
+		//get cached data from local storage
+		let cacheddata: any = localStorage.getItem('kvitton');
+		if (cacheddata) {
+			cacheddata = JSON.parse(cacheddata);
+			expired = parseInt(Date.now() / 1000) - cacheddata!.cachetime > cachelife;
+		}
+		//If cached data available and not expired return them.
+		if (cacheddata && !expired) {
+			return cacheddata.kvitton;
+		} else {
+			//otherwise fetch data from api then save the data in localstorage
+			const kvittoLista = await pb.collection('kvitton').getFullList(12, {
+			sort: '-datum'
+		});
+			kvitton = kvittoLista;
+			var json = { kvitton: kvitton, cachetime: parseInt(Date.now() / 1000) };
+			localStorage.setItem('kvitton', JSON.stringify(json));
+			return kvitton;
+		}
+	};
 </script>
 
-<svelte:head>
-	<title>Admin för NF Kvitton</title>
-	<html lang="se" />
-</svelte:head>
+
 <span class="spanStilen">
-	<button class="excelKnapp" on:click={() => skapaExcelArk(kvitton)}>
-	  Exportera till excel
-	</button>
-  </span>
+	<button class="excelKnapp" on:click={() => skapaExcelArk(kvitton)}> Exportera till excel </button>
+</span>
 <div class="filterStilen">
-	<button name="visaalla" value="alla" on:click={() => visa = "alla"}>Visa alla
+	<button name="visaalla" value="alla" on:click={() => (visa = 'alla')}>Visa alla </button>
+	<button name="visaintefixade" value="intefixade" on:click={() => (visa = 'inteFixade')}
+		>Visa inte fixade
 	</button>
-	<button name="visaintefixade" value="intefixade" on:click={() => visa = "inteFixade"}>Visa inte
-	  fixade
+	<button name="visaintäkter" value="visaintäkter" on:click={() => (visa = 'Intäkt')}
+		>Visa intäkter
 	</button>
-	<button name="visaintäkter" value="visaintäkter" on:click={() => visa = "Intäkt"}>Visa intäkter
+	<button name="visautgifter" value="visautgifter" on:click={() => (visa = 'Avgift')}
+		>Visa avgifter
 	</button>
-	<button name="visautgifter" value="visautgifter" on:click={() => visa = "Avgift"}>Visa avgifter
-	</button>
-  </div>
+</div>
 <div class="kvittoHuvud">
-	{#each kvitton as kvitto  (kvitto.id)}
-		{#if visa == "alla" ? true : 
-		visa == "inteFixade" ? kvitto.fixad === false : 
-		visa == "Intäkt" ? kvitto.typavkop === "Intäkt" : 
-		visa == "Avgift" ? kvitto.typavkop === "Avgift" : 
-		false}
+	{#each kvitton as kvitto (kvitto.id)}
+		{#if visa == 'alla' ? true : visa == 'inteFixade' ? kvitto.fixad === false : visa == 'Intäkt' ? kvitto.typavkop === 'Intäkt' : visa == 'Avgift' ? kvitto.typavkop === 'Avgift' : false}
 			<div class="kvittoStil">
 				<div class="kvittoBild">
 					<a href={`/admin/${kvitto.id}`}>
@@ -55,10 +69,18 @@
 					</a>
 				</div>
 				<div class="kvittoText">
-					<p class="kvittoDetaljer">Namn på {kvitto.typavkop.toLocaleLowerCase()}en: {kvitto.vara}</p>
-					<p class="kvittoDetaljer">Summa på {kvitto.typavkop.toLocaleLowerCase()}en: {kvitto.pris}kr</p>
-					<p class="kvittoDetaljer">Kategori på {kvitto.typavkop.toLocaleLowerCase()}en: {kvitto.kategori}</p>
-					<p class="kvittoDetaljer">Datum {kvitto.typavkop.toLocaleLowerCase()}en skedde: {kvitto.datum.slice(0, 10)}</p>
+					<p class="kvittoDetaljer">
+						Namn på {kvitto.typavkop.toLocaleLowerCase()}en: {kvitto.vara}
+					</p>
+					<p class="kvittoDetaljer">
+						Summa på {kvitto.typavkop.toLocaleLowerCase()}en: {kvitto.pris}kr
+					</p>
+					<p class="kvittoDetaljer">
+						Kategori på {kvitto.typavkop.toLocaleLowerCase()}en: {kvitto.kategori}
+					</p>
+					<p class="kvittoDetaljer">
+						Datum {kvitto.typavkop.toLocaleLowerCase()}en skedde: {kvitto.datum.slice(0, 10)}
+					</p>
 					<p class="kvittoDetaljer">Swish-nummer: {kvitto.swish}</p>
 				</div>
 			</div>
@@ -84,18 +106,18 @@
 		flex-direction: column;
 		width: 400px;
 		margin: 0 auto;
-		}
+	}
 	.kvittoStil {
 		display: flex;
 		align-items: center;
 		margin-bottom: 1vh;
 		max-width: 400px;
 	}
-    .kvittoText{
-        display: flex;
-        flex-direction: column;
-        width: fit-content;
-    }
+	.kvittoText {
+		display: flex;
+		flex-direction: column;
+		width: fit-content;
+	}
 	.kvittoBild {
 		margin: 0.5vw;
 	}
