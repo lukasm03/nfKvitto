@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { pb } from '$lib/pocketbase';
 	import { onMount } from 'svelte';
-	import skapaExcelArk from './excel';
+	let skapaExcelArk: Function;
 
 	let kvitton: any[] = [];
 	let visa: string = "alla";
@@ -10,6 +10,7 @@
 		const kvittoLista = await pb.collection('kvitton').getFullList(10, {
 			sort: '-datum',
 		});
+		skapaExcelArk = (await import(`./excel`)).default; // this will work
 		kvitton = kvittoLista;
 	});
 </script>
