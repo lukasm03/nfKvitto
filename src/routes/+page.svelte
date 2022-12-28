@@ -5,6 +5,10 @@
 </script>
 
 
+<svelte:head>
+	<title>NF Kvitton</title>
+	<html lang="se" />
+</svelte:head>
 <Login />
 
 {#if $currentUser}

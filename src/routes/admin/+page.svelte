@@ -6,7 +6,10 @@
 
 
 <Login />
-
+<svelte:head>
+	<title>Admin för NF-Kvitton</title>
+	<html lang="se" />
+</svelte:head>
 {#if $currentUser}
 
   <Kvitton />

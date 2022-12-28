@@ -51,6 +51,10 @@
 
 </script>
 
+<svelte:head>
+	<title>Ändra kvitto: {kvitto.vara}</title>
+	<html lang="se" />
+</svelte:head>
 {#if !visaQr}
     <div class="huvudStilen">
         <div class="knappStilen">

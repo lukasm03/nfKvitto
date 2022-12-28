@@ -10,6 +10,7 @@
 
 </script>
 
+
 {#if $currentUser === null}
     <div class="login">
         <form on:submit|preventDefault={login} class="formStilen">

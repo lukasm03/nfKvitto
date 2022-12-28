@@ -15,6 +15,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Admin för NF Kvitton</title>
+	<html lang="se" />
+</svelte:head>
 <span class="spanStilen">
 	<button class="excelKnapp" on:click={() => skapaExcelArk(kvitton)}>
 	  Exportera till excel

@@ -41,6 +41,7 @@
 
 </script>
 
+
 <div class="knapparStilen">
     <button name="typavkop" on:click={() => typavkop = 'Avgift'}>Avgifter
     </button>
