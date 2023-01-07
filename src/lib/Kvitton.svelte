@@ -4,7 +4,7 @@
 	let skapaExcelArk: Function;
 
 	let kvitton: any[] = [];
-	let visa: string = 'alla';
+	let visa = 'alla';
 
 	onMount(async () => {
 		kvitton = await getdata();
@@ -12,31 +12,13 @@
 	});
 
 	const getdata = async () => {
-		// set cache lifetime in seconds
-		const cachelife = 30;
-		let expired: boolean = false;
-		//get cached data from local storage
-		let cacheddata: any = localStorage.getItem('kvitton');
-		if (cacheddata) {
-			cacheddata = JSON.parse(cacheddata);
-			expired = parseInt(Date.now() / 1000) - cacheddata!.cachetime > cachelife;
-		}
-		//If cached data available and not expired return them.
-		if (cacheddata && !expired) {
-			return cacheddata.kvitton;
-		} else {
-			//otherwise fetch data from api then save the data in localstorage
-			const kvittoLista = await pb.collection('kvitton').getFullList(12, {
-			sort: '-datum'
+		const records = await pb.collection('kvitton').getFullList(200 /* batch size */, {
+			sort: '-created'
 		});
-			kvitton = kvittoLista;
-			var json = { kvitton: kvitton, cachetime: parseInt(Date.now() / 1000) };
-			localStorage.setItem('kvitton', JSON.stringify(json));
-			return kvitton;
-		}
+		kvitton = records;
+		return kvitton;
 	};
 </script>
-
 
 <span class="spanStilen">
 	<button class="excelKnapp" on:click={() => skapaExcelArk(kvitton)}> Exportera till excel </button>
@@ -60,7 +42,7 @@
 				<div class="kvittoBild">
 					<a href={`/admin/${kvitto.id}`}>
 						<img
-							src={`https://nfkvitto.se/api/files/kvitton/${kvitto.id}/${kvitto.bild}?thumb=100x100`}
+							src={`https://nfdatabas.fly.dev/api/files/kvitton/${kvitto.id}/${kvitto.bild}?thumb=100x100`}
 							alt={'bild på kvittot'}
 							width={80}
 							height={80}
