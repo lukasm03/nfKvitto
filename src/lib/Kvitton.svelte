@@ -1,23 +1,17 @@
 <script lang="ts">
 	import { pb } from '$lib/pocketbase';
 	import { onMount } from 'svelte';
-	let skapaExcelArk: Function;
 
+	let skapaExcelArk: any;
 	let kvitton: any[] = [];
 	let visa = 'alla';
 
 	onMount(async () => {
-		kvitton = await getdata();
-		skapaExcelArk = (await import(`./excel`)).default; // this will work
-	});
-
-	const getdata = async () => {
-		const records = await pb.collection('kvitton').getFullList(200 /* batch size */, {
+		kvitton = await pb.collection('kvitton').getFullList(200 /* batch size */, {
 			sort: '-created'
 		});
-		kvitton = records;
-		return kvitton;
-	};
+		skapaExcelArk = (await import(`./excel`)).default; // this will work
+	});
 </script>
 
 <span class="spanStilen">

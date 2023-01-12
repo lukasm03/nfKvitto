@@ -22,6 +22,10 @@
 {/if}
 
 <style>
+	input[type='password'],
+	input[type='text'] {
+		font-size: 16px;
+	}
 	.formStilen {
 		display: flex;
 		flex-direction: column;

@@ -69,6 +69,13 @@
 </div>
 
 <style>
+	input[type='date'],
+	input[type='number'],
+	input[type='tel'],
+	input[type='text'],
+	select:focus {
+		font-size: 16px;
+	}
 	.huvudContainer {
 		display: flex;
 		justify-content: center;

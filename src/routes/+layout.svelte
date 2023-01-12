@@ -3,4 +3,8 @@
 </script>
 
 <LoggaHeader />
-<slot />
+<div class="color">
+	<slot />
+</div>
+
+
