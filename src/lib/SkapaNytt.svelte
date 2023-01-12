@@ -76,6 +76,7 @@
 	select:focus {
 		font-size: 16px;
 	}
+	
 	.huvudContainer {
 		display: flex;
 		justify-content: center;

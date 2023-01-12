@@ -3,8 +3,13 @@
 </script>
 
 <LoggaHeader />
-<div class="color">
-	<slot />
-</div>
+
+<slot />
+
+
+
+<style>
+	slot {margin: 0; height: 100%; overflow: hidden}
+</style>
 
 
