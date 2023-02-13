@@ -7,8 +7,8 @@
 	let visa = 'alla';
 
 	onMount(async () => {
-		kvitton = await pb.collection('kvitton').getFullList(200 /* batch size */, {
-			sort: '-created'
+		kvitton = await pb.collection('kvitton').getFullList(20 /* batch size */, {
+			sort: '-datum'
 		});
 		skapaExcelArk = (await import(`./excel`)).default; // this will work
 	});
