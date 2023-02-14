@@ -74,34 +74,42 @@
 	input[type='tel'],
 	input[type='text'],
 	select:focus {
-		font-size: 16px;
+		font-size: 16px;	
 	}
-	
+	button[type='submit'] {
+		margin-top: 2vh;
+		font-weight: bold;
+	}
 	.huvudContainer {
 		display: flex;
 		justify-content: center;
+		color: #001F3F;
 	}
 	.knapparStilen {
 		display: flex;
 		justify-content: center;
+		color: #001F3F;
 	}
 	.formStilen {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		max-width: 62vw;
+		color: #001F3F;
 	}
 	.selectStilen {
 		min-width: 120px;
 		max-width: 6vw;
+		color: #001F3F;
 	}
 	label {
 		margin-top: 1vh;
 		width: fit-content;
+		color: #001F3F;
 	}
 	button {
-		margin-top: 2vh;
 		width: fit-content;
+		color: #001F3F;
 	}
 	input {
 		width: auto;

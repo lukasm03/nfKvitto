@@ -22,6 +22,7 @@
 	}
 	.huvudText {
 		margin: 1vh;
+		color: #001F3F;
 		align-self: center;
 	}
 </style>
