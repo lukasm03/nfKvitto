@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { PageData } from "../$types";
+	import type { PageData } from '../$types';
 	export let data: PageData;
 	import { pb } from '$lib/pocketbase';
 	import { onMount } from 'svelte';
@@ -20,6 +20,9 @@
 				kvitto.pris
 			}},"message":{"value":${JSON.stringify(kvitto.vara)}}}`
 		};
+		kvitto.datum = kvitto.datum.split(' ')[0];
+		console.log(kvitto);
+		console.log(kvitto.datum);
 		fetch('https://api.swish.nu/qr/v2/prefilled', options)
 			.then((response) => response.blob())
 			.then((blob) => URL.createObjectURL(blob))

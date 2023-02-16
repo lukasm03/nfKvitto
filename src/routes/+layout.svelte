@@ -6,10 +6,10 @@
 
 <slot />
 
-
-
 <style>
-	slot {margin: 0; height: 100%; overflow: hidden}
+	slot {
+		margin: 0;
+		height: 100%;
+		overflow: hidden;
+	}
 </style>
-
-

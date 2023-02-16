@@ -68,17 +68,17 @@
 	.spanStilen {
 		display: flex;
 		justify-content: center;
-		color: #001F3F;
+		color: #001f3f;
 	}
 	.excelKnapp {
 		justify-content: center;
-		color: #001F3F;
+		color: #001f3f;
 	}
 	.filterStilen {
 		margin-top: 0.5vh;
 		display: flex;
 		justify-content: center;
-		color: #001F3F;
+		color: #001f3f;
 	}
 	.kvittoHuvud {
 		display: flex;
@@ -91,19 +91,19 @@
 		align-items: center;
 		margin-bottom: 1vh;
 		max-width: 400px;
-		color: #001F3F;
+		color: #001f3f;
 	}
 	.kvittoText {
 		display: flex;
 		flex-direction: column;
 		width: fit-content;
-		color: #001F3F;
+		color: #001f3f;
 	}
 	.kvittoBild {
 		margin: 0.5vw;
 	}
 	.kvittoDetaljer {
 		margin: 0vw;
-		color: #001F3F;
+		color: #001f3f;
 	}
 </style>
